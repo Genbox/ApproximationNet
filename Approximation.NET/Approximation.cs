@@ -22,7 +22,7 @@ namespace ApproximationNET
             //compute sine
             if (x < 0)
                 return (4 / (float)Math.PI) * x + (4 / (float)(Math.PI * Math.PI)) * x * x;
-            
+
             return (4 / (float)Math.PI) * x - (4 / (float)(Math.PI * Math.PI)) * x * x;
         }
 
@@ -47,7 +47,7 @@ namespace ApproximationNET
 
                 if (sin < 0)
                     return .225f * (sin * -sin - sin) + sin;
-                
+
                 return .225f * (sin * sin - sin) + sin;
             }
             else
@@ -56,7 +56,7 @@ namespace ApproximationNET
 
                 if (sin < 0)
                     return .225f * (sin * -sin - sin) + sin;
-                
+
                 return .225f * (sin * sin - sin) + sin;
             }
         }
@@ -82,7 +82,7 @@ namespace ApproximationNET
 
             if (x < 0)
                 return (4 / (float)Math.PI) * x + (4 / (float)(Math.PI * Math.PI)) * x * x;
-            
+
             return (4 / (float)Math.PI) * x - (4 / (float)(Math.PI * Math.PI)) * x * x;
         }
 
@@ -111,7 +111,7 @@ namespace ApproximationNET
 
                 if (cos < 0)
                     return .225f * (cos * -cos - cos) + cos;
-                
+
                 return .225f * (cos * cos - cos) + cos;
             }
             else
@@ -120,7 +120,7 @@ namespace ApproximationNET
 
                 if (cos < 0)
                     return .225f * (cos * -cos - cos) + cos;
-                
+
                 return .225f * (cos * cos - cos) + cos;
             }
         }
@@ -139,10 +139,12 @@ namespace ApproximationNET
         /// Takes the inverse square root of x using Newton-Raphson
         /// approximation with 1 pass after clever inital guess using
         /// bitshifting.
+        /// See http://betterexplained.com/articles/understanding-quakes-fast-inverse-square-root/ for more information.
         /// </summary>
         /// <param name="x">The value.</param>
+        /// <param name="iterations">The number of iterations to make. Higher means more precision.</param>
         /// <returns>The inverse square root of x</returns>
-        public static float InvSqrt(float x)
+        public static float InvSqrt(float x, int iterations = 0)
         {
             Convert convert = new Convert();
             convert.x = x;
@@ -150,11 +152,17 @@ namespace ApproximationNET
             convert.i = 0x5f3759df - (convert.i >> 1);
             x = convert.x;
             x = x * (1.5f - xhalf * x * x);
+
+            for (int i = 0; i < iterations; i++)
+            {
+                x = x * (1.5f - xhalf * x * x);
+            }
+
             return x;
         }
 
         [StructLayout(LayoutKind.Explicit)]
-        public struct Convert
+        private struct Convert
         {
             [FieldOffset(0)]
             public float x;

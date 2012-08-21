@@ -12,6 +12,8 @@ namespace ApproximationNET
             double result = 0;
             const int iterations = 1000000;
 
+            Console.WriteLine("Running each test with " + iterations + " iterations.");
+
             stopwatch.Start();
             for (int i = 0; i < iterations; i++)
             {
