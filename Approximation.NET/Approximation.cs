@@ -126,7 +126,7 @@ namespace ApproximationNET
         }
 
         /// <summary>
-        /// Cosine approximation using Taylor series.
+        /// Sine approximation using Taylor series.
         /// </summary>
         /// <param name="x">The value</param>
         /// <returns>Sine of x</returns>
