@@ -26,4 +26,4 @@ Real: 0.4472136
 Approximated: 0.447141
 ```
 
-For more examples, take a look at the Approximation.NET Client included in the proejct.
+For more examples, take a look at the Approximation.NET Client included in the project.
